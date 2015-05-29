@@ -52,5 +52,7 @@ group :development, :test do
   gem 'binding_of_caller'
   gem 'rails-flog', require: 'flog'
   gem 'quiet_assets'
+  gem 'hirb'
+  gem 'hirb-unicode'
+  gem 'awesome_print'
 end
-
