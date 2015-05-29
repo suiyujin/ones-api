@@ -31,5 +31,8 @@ module OnesApi
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    # If you wish to temporarily re-enable the logging of the asset pipeline messages. Default is true.
+    # config.quiet_assets = false
   end
 end

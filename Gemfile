@@ -51,5 +51,6 @@ group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'rails-flog', require: 'flog'
+  gem 'quiet_assets'
 end
 
