@@ -55,3 +55,10 @@ CSV.foreach('db/testcsv/comments.csv') do |row|
                  user_id:row[5],
                  role:row[6])
 end
+
+CSV.foreach('db/testcsv/battles.csv') do |row|
+  Battle.create(article1_id:row[1],
+                 article2_id:row[2],
+                 vote1_num:row[3],
+                 vote2_num:row[4])
+end
