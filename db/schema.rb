@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150530190706) do
+ActiveRecord::Schema.define(version: 20150530201105) do
 
   create_table "articles", force: :cascade do |t|
     t.string   "title",         limit: 255
@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(version: 20150530190706) do
   create_table "hobbies", force: :cascade do |t|
     t.string  "name",        limit: 255
     t.integer "category_id", limit: 4
+    t.string  "photo_url",   limit: 255
   end
 
   add_index "hobbies", ["category_id"], name: "index_hobbies_on_category_id", using: :btree

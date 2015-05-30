@@ -16,9 +16,10 @@ CSV.foreach('db/testcsv/categories.csv') do |row|
   Category.create(name:row[1])
 end
 
-CSV.foreach('db/testcsv/hobbies.csv') do |row|
+CSV.foreach('db/testcsv/hobbies_unix.csv') do |row|
   Hobby.create(name:row[1],
-               category_id:row[2])
+               category_id:row[2],
+               photo_url:row[3])
 end
 
 CSV.foreach('db/testcsv/hobbies_users.csv') do |row|
