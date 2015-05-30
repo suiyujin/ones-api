@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
-  protect_from_forgery except: [ :addViewAddition, :create ]
+  protect_from_forgery except: [ :addViewAddition, :create, :good, :bad ]
 
   # GET /articles
   # GET /articles.json
@@ -59,13 +59,39 @@ class ArticlesController < ApplicationController
     end
   end
 
-  # POST /users/addViewAddition
+  # POST /article/addViewAddition
   # params: article_id, add_count
   def addViewAddition
     @article = Article.find( params[:article_id] )
     count = @article.view_count
 
     @article.update_attribute( :view_count, count + params[:add_count].to_i )
+
+    culc_point
+
+    render json: { result: true }
+  end
+
+  # POST /article/good
+  # params: my_id, article_id
+  def good
+    @article = Article.find( params[:article_id] )
+    @user = User.find( params[:my_id] )
+
+    @article.liked_by @user
+
+    culc_point
+
+    render json: { result: true }
+  end
+
+  # POST /article/bad
+  # params: my_id, article_id
+  def bad
+    @article = Article.find( params[:article_id] )
+    @user = User.find( params[:my_id] )
+
+    @article.downvote_from @user
 
     culc_point
 
