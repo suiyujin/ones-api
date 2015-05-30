@@ -185,7 +185,7 @@ class ArticlesController < ApplicationController
       point += @article.get_likes.size()
       point -= @article.get_dislikes.size()
 
-      if @user.follows_of_from_user.count != 0 
+      if @user.follows_of_from_user.count != 0
         point /= @user.follows_of_from_user.count
       end
 

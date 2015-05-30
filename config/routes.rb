@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get 'users/getUserInfo'
   get 'articles/getFeed'
   get 'users/getHobbies'
+  get 'battles/getBattleInfo'
 
   post 'articles/addViewAddition'
   post 'users/follow'
@@ -9,6 +10,7 @@ Rails.application.routes.draw do
   post 'articles/good'
   post 'articles/bad'
   post 'articles/comment'
+  post 'battles/addVotenum'
 
   resources :articles
   devise_for :users
