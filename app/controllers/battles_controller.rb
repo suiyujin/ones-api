@@ -19,15 +19,30 @@ class BattlesController < ApplicationController
   end
 
   def getBattleInfo
+    login_user_id = params[:my_id]
+    login_user = User.find(login_user_id)
+    battle_id = params[:battle_id]
 
-    @my_battle = Battle.find(params[:my_battle])
-    @my_battle_array = [@my_battle.article1,@my_battle.article2]
-    @json_battle_array = Hash.new
-    @json_battle_array["result"] = true
-    @json_battle_array["data"] = @my_battle_array
+    my_battle = Battle.find(battle_id)
+    articles_hash = make_articles_hash([my_battle.article1, my_battle.article2], login_user)
 
-    render :json => @json_battle_array
+    if articles_hash.blank?
+      res = {
+        result: false,
+        data: nil
+      }
+    else
+      res = {
+        result: true,
+        data: {
+          login_user_id: login_user_id,
+          battle_id: battle_id,
+          articles: articles_hash
+        }
+      }
+    end
 
+    render json: res
   end
 
   def addVotenum

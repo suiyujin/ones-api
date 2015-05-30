@@ -31,6 +31,7 @@ end
 
 CSV.foreach('db/testcsv/articles.csv') do |row|
   Article.create(title:row[1],
+                 image_path:row[2],
                  contents:row[3],
                  view_count:row[4],
                  point:row[5],
