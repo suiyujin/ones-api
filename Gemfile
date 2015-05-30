@@ -59,3 +59,6 @@ end
 
 # for probrem of n+1
 gem 'bullet', group: :development
+
+# Authentication
+gem 'devise'
