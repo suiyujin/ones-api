@@ -2,6 +2,50 @@ class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
   protect_from_forgery except: [ :addViewAddition, :create, :good, :bad, :comment ]
 
+  # GET /articles/getFeed
+  # param : my_id, hobby_id
+  def getFeed
+    login_user_id = params[:my_id].to_i
+    login_user = User.find(login_user_id)
+
+    hobby_id = params[:hobby_id].to_i
+
+    limit_num = 20
+
+    articles_new_hash = make_articles_hash(Article.where(hobby_id: hobby_id).order('id DESC').limit(limit_num), login_user)
+
+    articles_hot_hash = make_articles_hash(Article.where(hobby_id: hobby_id).where('published_at >= ?', 1.weeks.ago).limit(limit_num), login_user)
+
+    articles_legend_hash = make_articles_hash(Article.where(hobby_id: hobby_id).order('point DESC').limit(limit_num), login_user)
+
+    if articles_new_hash.blank? && articles_hot_hash.blank? && articles_legend_hash.blank?
+      res = {
+        result: false,
+        data: nil
+      }
+    else
+      res = {
+        result: true,
+        data: [
+          {
+            segment_type: 'new',
+            articles: articles_new_hash
+          },
+          {
+            segment_type: 'hot',
+            articles: articles_hot_hash
+          },
+          {
+            segment_type: 'legend',
+            articles: articles_legend_hash
+          }
+        ]
+      }
+    end
+
+    render json: res
+  end
+
   # GET /articles
   # GET /articles.json
   def index
@@ -144,5 +188,5 @@ class ArticlesController < ApplicationController
       point += @article.view_count * 0.1
 
       @article.update_attribute( :point, point )
-    end 
+    end
 end
