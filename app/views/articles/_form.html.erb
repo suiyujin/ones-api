@@ -1,0 +1,49 @@
+<%= form_for(@article) do |f| %>
+  <% if @article.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@article.errors.count, "error") %> prohibited this article from being saved:</h2>
+
+      <ul>
+      <% @article.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :image_path %><br>
+    <%= f.text_field :image_path %>
+  </div>
+  <div class="field">
+    <%= f.label :contents %><br>
+    <%= f.text_area :contents %>
+  </div>
+  <div class="field">
+    <%= f.label :view_count %><br>
+    <%= f.number_field :view_count %>
+  </div>
+  <div class="field">
+    <%= f.label :point %><br>
+    <%= f.text_field :point %>
+  </div>
+  <div class="field">
+    <%= f.label :published_at %><br>
+    <%= f.datetime_select :published_at %>
+  </div>
+  <div class="field">
+    <%= f.label :user_id %><br>
+    <%= f.text_field :user_id %>
+  </div>
+  <div class="field">
+    <%= f.label :hobby_id %><br>
+    <%= f.text_field :hobby_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
