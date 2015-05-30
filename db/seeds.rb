@@ -1,10 +1,11 @@
 require 'csv'
 
-CSV.foreach('db/testcsv/users.csv') do |row|
+CSV.foreach('db/testcsv/users_unix.csv') do |row|
   User.create(email:row[1],
               password:row[2],
               password_confirmation:row[3],
-              name:row[12])
+              name:row[12],
+              profile_image_path:row[13])
 end
 
 CSV.foreach('db/testcsv/follows.csv') do |row|
