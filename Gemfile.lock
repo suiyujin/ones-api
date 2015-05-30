@@ -36,6 +36,8 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    acts_as_commentable (4.0.2)
+    acts_as_votable (0.10.0)
     anbt-sql-formatter (0.0.3)
     arel (6.0.0)
     awesome_print (1.6.1)
@@ -189,6 +191,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts_as_commentable
+  acts_as_votable (~> 0.10.0)
   awesome_print
   better_errors
   binding_of_caller
