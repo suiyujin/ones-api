@@ -11,11 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150530053612) do
+ActiveRecord::Schema.define(version: 20150530053822) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name", limit: 255
   end
+
+  create_table "hobbies", force: :cascade do |t|
+    t.string  "name",        limit: 255
+    t.integer "category_id", limit: 4
+  end
+
+  add_index "hobbies", ["category_id"], name: "index_hobbies_on_category_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "",                     null: false
@@ -38,4 +45,5 @@ ActiveRecord::Schema.define(version: 20150530053612) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "hobbies", "categories"
 end
