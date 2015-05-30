@@ -2,11 +2,8 @@ Rails.application.routes.draw do
   get 'users/getUserInfo'
   get 'articles/getFeed'
   get 'users/getHobbies'
-<<<<<<< HEAD
   get 'battles/getBattleInfo'
-=======
   get 'users/getTimeLine'
->>>>>>> 0d27b05c1b736b6df561a90e62a7a049caf50391
 
   post 'articles/addViewAddition'
   post 'users/follow'
