@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get 'users/getUserInfo'
   get 'articles/getFeed'
   get 'users/getHobbies'
+  get 'users/getTimeLine'
 
   post 'articles/addViewAddition'
   post 'users/follow'
