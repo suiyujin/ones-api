@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   has_many :articles
   has_many :hobby_users
   has_many :hobbies, :through => :hobby_users
+  has_many :comments
 
   # follow
   has_many :friendships_of_from_user, :class_name => 'Follow', :foreign_key => 'from_user_id', :dependent => :destroy
