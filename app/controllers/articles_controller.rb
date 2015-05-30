@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
+  protect_from_forgery except: :addViewAddition
 
   # GET /articles
   # GET /articles.json
@@ -61,6 +62,17 @@ class ArticlesController < ApplicationController
     end
   end
 
+  # POST /users/addViewAddition
+  # params: article_id, add_count
+  def addViewAddition
+    @article = Article.find( params[:article_id] )
+    count = @article.view_count
+
+    @article.update_attribute( :view_count, count + params[:add_count].to_i )
+
+    render json: @article
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_article
@@ -71,4 +83,25 @@ class ArticlesController < ApplicationController
     def article_params
       params.require(:article).permit(:title, :image_path, :contents, :view_count, :point, :published_at, :user_id, :hobby_id)
     end
+
+    def culc_point # @article に対象の記事があれば動きます
+      point = 0
+
+      @article.comments.each do |comment|
+        user = User.find( comment.user_id )
+
+        if user.voted_as_when_voted_for @article
+          point += 5
+        elsif (user.voted_as_when_voted_for @article) == false
+          point -= 5
+        end
+      end
+
+      point += @article.get_likes.size()
+      point -= @article.get_dislikes.size()
+
+      point += @article.view_count * 0.1
+
+      @article.update_attribute( :point, point )
+    end 
 end

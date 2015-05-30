@@ -1,4 +1,13 @@
 Rails.application.routes.draw do
+  get 'users/getUserInfo'
+
+  post 'articles/addViewAddition'
+  post 'users/follow'
+  post 'users/unfollow'
+  post 'articles/good'
+  post 'articles/bad'
+  post 'articles/comment'
+
   resources :articles
   devise_for :users
   root 'welcome#index'
