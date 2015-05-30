@@ -62,3 +62,6 @@ gem 'bullet', group: :development
 
 # Authentication
 gem 'devise'
+
+# Comment
+gem 'acts_as_commentable'
