@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
-  protect_from_forgery except: [ :addViewAddition, :create, :good, :bad ]
+  protect_from_forgery except: [ :addViewAddition, :create, :good, :bad, :comment ]
 
   # GET /articles
   # GET /articles.json
@@ -92,6 +92,22 @@ class ArticlesController < ApplicationController
     @user = User.find( params[:my_id] )
 
     @article.downvote_from @user
+
+    culc_point
+
+    render json: { result: true }
+  end
+
+  # POST /article/comment
+  # params: my_id, article_id, comment_body
+  def comment
+    @article = Article.find( params[:article_id] )
+    @user = User.find( params[:my_id] )
+
+    comment = @article.comments.create
+    comment.user_id = params[:my_id]
+    comment.comment = params[:comment_body]
+    comment.save
 
     culc_point
 
