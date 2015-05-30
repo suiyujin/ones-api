@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'users/getUserInfo'
+
   resources :articles
   devise_for :users
   root 'welcome#index'
