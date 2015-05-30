@@ -27,6 +27,7 @@ class UsersController < ApplicationController
           user_id: target_user_id,
           name: target_user.name,
           follow: login_user_follow,
+          profile_image: target_user.profile_image_path,
           articles: articles_hash
         }
       }
@@ -46,6 +47,7 @@ class UsersController < ApplicationController
     hobbies_hash = hobbies.map do |hobby|
       hobby_hash = hobby.attributes
       hobby_hash['category_name'] = hobby.category.name
+      hobby_hash['photo_url'] = hobby.photo_url
       hobby_hash
     end
 
