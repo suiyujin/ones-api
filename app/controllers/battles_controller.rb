@@ -60,7 +60,7 @@ class BattlesController < ApplicationController
       my_battle.update_attribute( :vote2_num, plus_votenum )
     end
 
-    render nothing: true
+    render json: {result: true}
   end
 
 end
