@@ -3,13 +3,13 @@ class BattlesController < ApplicationController
 
   def getBattleInfo
 
-    @my_battle = params[:my_battle]
     @my_battle = Battle.find(params[:my_battle])
-    @article1 = Article.find_by(@my_battle.article1_id)
-    @article2 = Article.find_by(@my_battle.article2_id)
+    @my_battle_array = [@my_battle.article1,@my_battle.article2]
+    @json_battle_array = Hash.new
+    @json_battle_array["result"] = true
+    @json_battle_array["data"] = @my_battle_array
 
-    render :json => @article2
-
+    render :json => @json_battle_array
 
   end
 
