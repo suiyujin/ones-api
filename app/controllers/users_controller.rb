@@ -2,7 +2,6 @@ class UsersController < ApplicationController
   # GET /users/getUserInfo
   # params: target_id
   def getUserInfo
-    # とりあえず決め打ち
     login_user_id = params[:my_id].to_i
     login_user = User.find(login_user_id)
 
