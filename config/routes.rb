@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get 'users/getUserInfo'
   get 'articles/getFeed'
+  get 'users/getHobbies'
 
   post 'articles/addViewAddition'
   post 'users/follow'
