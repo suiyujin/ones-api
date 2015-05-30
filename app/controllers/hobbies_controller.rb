@@ -33,7 +33,7 @@ class HobbiesController < ApplicationController
         @rank_user = User.find_by(id: key)
         @user_array["user_id"] = @rank_user.id
         @user_array["name"] = @rank_user.name
-        @point = value / (@rank_user.articles.count + @rank_user.follows_of_from_user.count)
+        @point = value / @rank_user.articles.count
         @user_array["point"] = @point
         @all_user_array.push(@user_array)
       }
