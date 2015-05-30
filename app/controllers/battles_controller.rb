@@ -30,4 +30,19 @@ class BattlesController < ApplicationController
 
   end
 
+  def addVotenum
+
+    @my_battle = Battle.find(params[:my_battle])
+    if params[:vote_id].to_i == 1 then
+      @current_votenum = @my_battle.vote1_num
+      @plus_votenum = @current_votenum + 1
+      @my_battle.update_attribute( :vote1_num, @plus_votenum )
+    else
+      @current_votenum = @my_battle.vote2_num
+      @plus_votenum = @current_votenum + 1
+      @my_battle.update_attribute( :vote2_num, @plus_votenum )
+    end
+
+  end
+
 end
