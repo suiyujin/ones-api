@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
 
   def make_articles_hash(articles, voter)
-    articles = articles.map do |article|
+    articles_hash = articles.map do |article|
       article_hash = article.attributes
       article_hash['published_at'] = article_hash['published_at'].strftime("%Y/%m/%d")
       vote_type = voter.voted_as_when_voted_for(article)
@@ -30,6 +30,6 @@ class ApplicationController < ActionController::Base
 
       article_hash
     end
-    articles
+    articles_hash
   end
 end
