@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150530054918) do
+ActiveRecord::Schema.define(version: 20150530055920) do
 
   create_table "articles", force: :cascade do |t|
     t.string   "title",        limit: 255
@@ -40,6 +40,17 @@ ActiveRecord::Schema.define(version: 20150530054918) do
 
   add_index "hobbies", ["category_id"], name: "index_hobbies_on_category_id", using: :btree
 
+  create_table "hobby_users", force: :cascade do |t|
+    t.integer  "hobby_id",   limit: 4
+    t.integer  "user_id",    limit: 4
+    t.integer  "ranking",    limit: 4, default: 0
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+  end
+
+  add_index "hobby_users", ["hobby_id"], name: "index_hobby_users_on_hobby_id", using: :btree
+  add_index "hobby_users", ["user_id"], name: "index_hobby_users_on_user_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "",                     null: false
     t.string   "encrypted_password",     limit: 255, default: "",                     null: false
@@ -64,4 +75,6 @@ ActiveRecord::Schema.define(version: 20150530054918) do
   add_foreign_key "articles", "hobbies"
   add_foreign_key "articles", "users"
   add_foreign_key "hobbies", "categories"
+  add_foreign_key "hobby_users", "hobbies"
+  add_foreign_key "hobby_users", "users"
 end
