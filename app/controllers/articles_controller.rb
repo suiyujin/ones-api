@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
+  protect_from_forgery except: :addViewAddition
 
   # GET /articles
   # GET /articles.json
@@ -59,6 +60,17 @@ class ArticlesController < ApplicationController
       format.html { redirect_to articles_url, notice: 'Article was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  # POST /users/addViewAddition
+  # params: article_id, add_count
+  def addViewAddition
+    @article = Article.find( params[:article_id] )
+    count = @article.view_count
+
+    @article.update_attribute( :view_count, count + params[:add_count].to_i )
+
+    render json: @article
   end
 
   private
