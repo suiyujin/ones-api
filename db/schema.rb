@@ -11,19 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150530121300) do
+ActiveRecord::Schema.define(version: 20150530185440) do
 
   create_table "articles", force: :cascade do |t|
-    t.string   "title",        limit: 255
-    t.string   "image_path",   limit: 255
-    t.text     "contents",     limit: 65535
-    t.integer  "view_count",   limit: 4,     default: 0
-    t.float    "point",        limit: 24,    default: 0.0
+    t.string   "title",         limit: 255
+    t.string   "image_path",    limit: 255
+    t.text     "contents",      limit: 65535
+    t.integer  "view_count",    limit: 4,     default: 0
+    t.float    "point",         limit: 24,    default: 0.0
     t.datetime "published_at"
-    t.integer  "user_id",      limit: 4
-    t.integer  "hobby_id",     limit: 4
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
+    t.integer  "user_id",       limit: 4
+    t.integer  "hobby_id",      limit: 4
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+    t.float    "buttle_points", limit: 24,    default: 0.0
   end
 
   add_index "articles", ["hobby_id"], name: "index_articles_on_hobby_id", using: :btree
@@ -89,6 +90,7 @@ ActiveRecord::Schema.define(version: 20150530121300) do
     t.string   "name",                   limit: 255, default: "名称未設定",                null: false
     t.string   "profile_image_path",     limit: 255, default: "image/dummy_user.jpg"
     t.string   "profile",                limit: 255
+    t.float    "buttle_points",          limit: 24,  default: 0.0
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
