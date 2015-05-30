@@ -169,23 +169,23 @@ class ArticlesController < ApplicationController
       params.require(:article).permit(:title, :image_path, :contents, :view_count, :point, :published_at, :user_id, :hobby_id)
     end
 
-    def culc_point # @article に対象の記事があれば動きます
+    def culc_point # @article, @user に対象の記事があれば動きます
       point = 0
 
       @article.comments.each do |comment|
         user = User.find( comment.user_id )
 
         if user.voted_as_when_voted_for @article
-          point += 5
+          point += 1
         elsif (user.voted_as_when_voted_for @article) == false
-          point -= 5
+          point -= 1
         end
       end
 
       point += @article.get_likes.size()
       point -= @article.get_dislikes.size()
 
-      point += @article.view_count * 0.1
+      point /= @user.follows_of_from_user.count
 
       @article.update_attribute( :point, point )
     end
