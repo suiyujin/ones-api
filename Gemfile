@@ -68,3 +68,9 @@ gem 'acts_as_commentable'
 
 # Vote
 gem 'acts_as_votable', '~> 0.10.0'
+
+# heroku
+group :production do
+  gem 'pg'
+  gem 'rails_12factor'
+end
