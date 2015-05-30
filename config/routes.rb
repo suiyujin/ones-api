@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'users/getHobbies'
   get 'battles/getBattleInfo'
   get 'users/getTimeLine'
+  get 'battles/getBattlesList'
 
   post 'articles/addViewAddition'
   post 'users/follow'

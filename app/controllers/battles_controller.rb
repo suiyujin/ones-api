@@ -1,6 +1,23 @@
 class BattlesController < ApplicationController
   protect_from_forgery except: [ :addVotenum]
 
+  def getBattlesList
+    battles_list = Battle.all.map(&:attributes)
+    if battles_list.blank?
+      res = {
+        result: false,
+        data: nil
+      }
+    else
+      res = {
+        result: true,
+        data: battles_list
+      }
+    end
+
+    render json: res
+  end
+
   def getBattleInfo
 
     @my_battle = Battle.find(params[:my_battle])
