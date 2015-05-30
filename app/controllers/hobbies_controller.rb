@@ -24,7 +24,8 @@ class HobbiesController < ApplicationController
         @article = Article.where(hobby_id: hobby.id)
       end
 
-      @user_points = @article.order('sum_point desc').limit(100).group(:user_id).sum(:point)
+      #@user_points = @article.order('sum_point desc').limit(100).group(:user_id).sum(:point)
+      @user_points = @article.group(:user_id).sum(:point)
 
       @all_user_array = Array.new
       @user_points.each{|key, value|
@@ -32,10 +33,12 @@ class HobbiesController < ApplicationController
         @rank_user = User.find_by(id: key)
         @user_array["user_id"] = @rank_user.id
         @user_array["name"] = @rank_user.name
-        @user_array["point"] = value
+        @point = value / (@rank_user.articles.count + @rank_user.follows_of_from_user.count)
+        @user_array["point"] = @point
         @all_user_array.push(@user_array)
       }
 
+      @all_user_array = @all_user_array.sort{|a,b| a[:point] <=> b[:point]}.reverse
       @rank_array["users"] = @all_user_array
 
       @all_rank_array.push(@rank_array)
