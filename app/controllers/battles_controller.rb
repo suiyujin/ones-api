@@ -2,7 +2,13 @@ class BattlesController < ApplicationController
   protect_from_forgery except: [ :addVotenum]
 
   def getBattlesList
-    battles_list = Battle.all.map(&:attributes)
+    battles_list = Battle.all.map do |battle|
+      battle_hash = battle.attributes
+      battle_hash['article1_image'] = battle.article1.image_path
+      battle_hash['article2_image'] = battle.article2.image_path
+      battle_hash
+    end
+
     if battles_list.blank?
       res = {
         result: false,
