@@ -11,11 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150531021842) do
+ActiveRecord::Schema.define(version: 20150531031608) do
 
   create_table "articles", force: :cascade do |t|
     t.string   "title",         limit: 255
-    t.string   "image_path",    limit: 255,   default: "http://otakku-no1.herokuapp.com/images/dummy_image.png"
+    t.string   "image_path",    limit: 255,   default: "http://otakku-no1.herokuapp.com/images/dummy_image.png", null: false
     t.text     "contents",      limit: 65535
     t.integer  "view_count",    limit: 4,     default: 0
     t.float    "point",         limit: 24,    default: 0.0
