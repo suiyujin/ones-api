@@ -1,4 +1,24 @@
 Rails.application.routes.draw do
+  get 'users/getUserInfo'
+  get 'articles/getFeed'
+  get 'users/getHobbies'
+  get 'battles/getBattleInfo'
+  get 'users/getTimeLine'
+  get 'battles/getBattlesList'
+
+  post 'articles/addViewAddition'
+  post 'users/follow'
+  post 'users/unfollow'
+  post 'articles/good'
+  post 'articles/bad'
+  post 'articles/comment'
+  post 'battles/addVotenum'
+
+  resources :articles
+  devise_for :users
+  root 'welcome#index'
+  get 'hobbies/getRanking'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
