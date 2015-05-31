@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   protect_from_forgery except: [ :follow, :unfollow]
+
   # GET /users/getUserInfo
   # params: target_id
   def getUserInfo
@@ -129,13 +130,13 @@ class UsersController < ApplicationController
 
   def follow
     Follow.find_or_create_by(from_user_id: params[:my_id],to_user_id: params[:target_id])
-    render nothing:true
+    render nothing: true
   end
 
   def unfollow
-    @unfollow_data = Follow.find_by(from_user_id: params[:my_id],to_user_id: params[:target_id])
-    @unfollow_data.destroy
-    render nothing:true
+    unfollow_data = Follow.find_by(from_user_id: params[:my_id],to_user_id: params[:target_id])
+    unfollow_data.destroy
+    render nothing: true
   end
 
 end

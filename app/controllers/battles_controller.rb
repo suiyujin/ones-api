@@ -32,7 +32,6 @@ class BattlesController < ApplicationController
     my_battle = Battle.find(battle_id)
     articles_hash = make_articles_hash([my_battle.article1, my_battle.article2], login_user)
 
-
     articles_hash.map do |article_hash|
       if my_battle.article1.id == article_hash['id']
         article_hash['vote_num'] = my_battle.vote1_num.to_i
@@ -76,7 +75,6 @@ class BattlesController < ApplicationController
       my_battle.update_attribute( :vote2_num, plus_votenum )
     end
 
-    render json: {result: true}
+    render json: { result: true }
   end
-
 end

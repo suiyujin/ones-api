@@ -46,17 +46,6 @@ class ArticlesController < ApplicationController
     render json: res
   end
 
-  # GET /articles
-  # GET /articles.json
-  def index
-    @articles = Article.all
-  end
-
-  # GET /articles/1
-  # GET /articles/1.json
-  def show
-  end
-
   # GET /articles/new
   def new
     @article = Article.new
@@ -170,11 +159,11 @@ class ArticlesController < ApplicationController
       params.require(:article).permit(:title, :image_path, :contents, :view_count, :point, :published_at, :user_id, :hobby_id)
     end
 
-    def culc_point # @article, @user に対象の記事があれば動きます
+    def culc_point
       point = 0
 
       @article.comments.each do |comment|
-        user = User.find( comment.user_id )
+        user = User.find(comment.user_id)
 
         if user.voted_as_when_voted_for @article
           point += 1
@@ -183,10 +172,10 @@ class ArticlesController < ApplicationController
         end
       end
 
-      point += @article.get_likes.size()
-      point -= @article.get_dislikes.size()
+      point += @article.get_likes.size
+      point -= @article.get_dislikes.size
 
-      if @user.follows_of_from_user.count != 0
+      unless @user.follows_of_from_user.count == 0
         point /= @user.follows_of_from_user.count
       end
 
