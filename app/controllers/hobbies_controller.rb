@@ -47,6 +47,7 @@ class HobbiesController < ApplicationController
       @user_array["name"] = @rank_user.name
       @point = value / @rank_user.articles.count
       @user_array["point"] = @point
+      @user_array["profile_image_url"] = @rank_user.profile_image_path
       @all_user_array.push(@user_array)
     }
 
