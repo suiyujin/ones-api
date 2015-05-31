@@ -70,6 +70,7 @@ class ArticlesController < ApplicationController
   # POST /articles.json
   def create
     @article = Article.new( article_params )
+    @article.published_at = Time.zone.now
     result = false
 
     if @article.save
