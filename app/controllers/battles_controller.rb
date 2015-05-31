@@ -32,6 +32,16 @@ class BattlesController < ApplicationController
     my_battle = Battle.find(battle_id)
     articles_hash = make_articles_hash([my_battle.article1, my_battle.article2], login_user)
 
+
+    articles_hash.map do |article_hash|
+      if my_battle.article1.id == article_hash['id']
+        article_hash['vote_num'] = my_battle.vote1_num.to_i
+      elsif my_battle.article2.id == article_hash['id']
+        article_hash['vote_num'] = my_battle.vote2_num.to_i
+      end
+      article_hash
+    end
+
     if articles_hash.blank?
       res = {
         result: false,
