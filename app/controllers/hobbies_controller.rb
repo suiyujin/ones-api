@@ -50,7 +50,7 @@ class HobbiesController < ApplicationController
       @all_user_array.push(@user_array)
     }
 
-    @all_user_array = @all_user_array.sort{|a,b| a[:point] <=> b[:point]}.reverse
+    @all_user_array = @all_user_array.sort{|a,b| a['point'] <=> b['point']}.reverse
     @rank_array["users"] = @all_user_array
 
     @all_rank_array.push(@rank_array)
